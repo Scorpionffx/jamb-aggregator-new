@@ -2,68 +2,80 @@ import streamlit as st
 
 st.set_page_config(page_title="JAMB AGGREGATOR", page_icon="🎓", layout="centered")
 
-# --- HEADER ---
 st.markdown("""
 <style>
-.big-title {font-size:38px; font-weight:800; background: linear-gradient(90deg,#6a11cb,#2575fc); -webkit-background-clip:text; -webkit-text-fill-color:transparent;}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap');
+.big-title {font-family:'Poppins'; font-size:42px; font-weight:800; line-height:1.1; background: linear-gradient(90deg,#6a11cb 0%, #2575fc 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent;}
+.card {background: linear-gradient(135deg,#667eea 0%,#764ba2 100%); padding:20px; border-radius:20px; color:white; margin-bottom:15px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);}
+.free-badge {background:#00ff88; color:black; padding:5px 15px; border-radius:20px; font-weight:800;}
 </style>
-<div class="big-title">JAMB AGGREGATOR</div>
-<p>Calculate your JAMB & UNILAG chances</p>
+<div class="big-title">JAMB<br>AGGREGATOR</div>
+<p style="font-size:18px;">✨ Calculate your JAMB & UNILAG chances ✨</p>
 """, unsafe_allow_html=True)
 
-# --- JAMB FREE ---
-st.subheader("JAMB Score (FREE)")
-s1 = st.number_input("Subject 1", 0, 100, 70)
-s2 = st.number_input("Subject 2", 0, 100, 70)
-s3 = st.number_input("Subject 3", 0, 100, 70)
-s4 = st.number_input("Subject 4", 0, 100, 77)
+st.markdown('<div class="card">🎓 <b>JAMB Score</b> <span class="free-badge">FREE</span><br>Enter your 4 subjects</div>', unsafe_allow_html=True)
 
-if st.button("🚀 CALCULATE MY FUTURE"):
+col1, col2 = st.columns(2)
+with col1:
+    s1 = st.number_input("Subject 1 📚", 0, 100, 70)
+    s2 = st.number_input("Subject 2 📚", 0, 100, 70)
+with col2:
+    s3 = st.number_input("Subject 3 📚", 0, 100, 70)
+    s4 = st.number_input("Subject 4 📚", 0, 100, 77)
+
+if st.button("🚀 CALCULATE MY FUTURE ✨", use_container_width=True):
     total = s1+s2+s3+s4
-    st.success(f"Your Score: {total} / 400")
+    st.balloons()
+    st.success(f"### 🎉 Your JAMB Score: **{total} / 400**")
+    
     if total >= 300:
-        st.write("🎯 Recommended: 🔥 Medicine, Law, Pharmacy, Architecture")
+        st.markdown("#### 🎯 Omo you be genius! Recommended: 🔥 **Medicine, Law, Pharmacy, Architecture**")
+    elif total >= 250:
+        st.markdown("#### 🔥 You try! Recommended: **Engineering, Computer Science, Nursing**")
     elif total >= 200:
-        st.write("🎯 Recommended: Computer Science, Engineering, Nursing")
+        st.markdown("#### ✅ Good! Recommended: **Microbiology, Business Admin, Education**")
     else:
-        st.write("🎯 Recommended: Education, Arts, Management")
+        st.markdown("#### 💪 Don't give up! Recommended: **Arts, Education, Vocational**")
 
     st.divider()
     
-    # --- UNILAG PAID LOCK ---
-    st.subheader("🔒 UNILAG Aggregate (PAID - ₦500)")
-    st.warning("Pay ₦500 to PalmPay: 8028519092 | Name: Shola Taiwo\nThen WhatsApp 08028519092 for unlock code")
+    # --- PAID UNILAG ---
+    st.markdown("""
+    <div style="background: linear-gradient(135deg,#ff512f,#dd2476); padding:20px; border-radius:20px; color:white;">
+    <h2>🔒 UNILAG Aggregate (PAID)</h2>
+    <p>💰 Pay ₦500 to unlock your UNILAG admission chances!</p>
+    <p><b>PalmPay: 8028519092</b><br>Name: Shola Taiwo</p>
+    <p>WhatsApp receipt to 08028519092 to get code</p>
+    </div>
+    """, unsafe_allow_html=True)
     
-    code = st.text_input("Enter Unlock Code:", type="password")
+    code = st.text_input("🔑 Enter Unlock Code:", placeholder="Enter code after payment", type="password")
+    SECRET = "UNILAG2025"
     
-    # YOUR SECRET UNLOCK CODE - Change it!
-    SECRET_CODE = "UNILAG2025"
-    
-    if code == SECRET_CODE:
-        st.success("✅ Unlocked! Now calculate UNILAG")
-        jamb = total
-        waec = st.slider("O'Level Points (5 As = 20)", 0, 20, 20)
+    if code == SECRET:
+        st.success("✅ UNLOCKED! Welcome boss!")
+        waec = st.slider("O'Level Points (5 As = 20 points)", 0, 20, 20)
         putme = st.number_input("PutMe Score (0-30)", 0, 30, 25)
-        if st.button("Calculate UNILAG Aggregate"):
-            aggregate = (jamb/8) + waec + putme
-            st.balloons()
-            st.metric("Your UNILAG Aggregate", f"{aggregate:.2f}")
-            if aggregate >= 70:
-                st.success("🔥 High chance for Medicine/Law!")
-            elif aggregate >= 60:
-                st.info("✅ Good chance for competitive courses")
+        if st.button("🔥 Calculate UNILAG Aggregate", use_container_width=True):
+            aggregate = (total/8) + waec + putme
+            st.snow()
+            st.metric("🔥 Your UNILAG Aggregate", f"{aggregate:.2f} / 100")
+            if aggregate >= 75:
+                st.success("🎉 High chance! Go for Medicine/Law!")
+            elif aggregate >= 65:
+                st.info("😎 Good chance! Engineering, Nursing dey sure")
             else:
-                st.warning("Try less competitive course")
-    elif code != "":
-        st.error("❌ Wrong code! Pay first and WhatsApp for correct code")
+                st.warning("🤔 Try less competitive course")
+    elif code:
+        st.error("❌ Wrong code! Pay first nau 😅")
 
-# --- SUPPORT FOUNDER (OPTIONAL) ---
+# --- SUPPORT ---
 st.divider()
 st.markdown("""
-<div style="background:black; padding:20px; border-radius:15px; border:2px solid #00ff88;">
-<h2 style="color:#00ff88; text-align:center;">💚 Support The Founder</h2>
-<p style="color:#00ff88; text-align:center;">This project was built by a student. Your support keeps it alive!</p>
-<h1 style="color:#00ff88; text-align:center;">PalmPay: 8028519092</h1>
-<p style="color:white; text-align:center;">Shola Taiwo</p>
+<div style="background:black; padding:25px; border-radius:20px; border:3px solid #00ff88; text-align:center;">
+<h2 style="color:#00ff88;">💚 Support The Founder</h2>
+<p style="color:white;">Built by a student for students! 🙏</p>
+<h1 style="color:#00ff88;">PalmPay: 8028519092</h1>
+<p style="color:#aaa;">Shola Taiwo | 08028519092</p>
 </div>
 """, unsafe_allow_html=True)
