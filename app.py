@@ -29,13 +29,13 @@ if st.button("🚀 CALCULATE MY FUTURE ✨", use_container_width=True):
     st.success(f"### 🎉 Your JAMB Score: **{total} / 400**")
     
     if total >= 300:
-        st.markdown("#### 🎯 Omo you be genius! Recommended: 🔥 **Medicine, Law, Pharmacy, Architecture**")
+        st.markdown("#### 🎯 Omo you be genius! Recommended: 🔥 **Medicine, Law, Pharmacy**")
     elif total >= 250:
         st.markdown("#### 🔥 You try! Recommended: **Engineering, Computer Science, Nursing**")
     elif total >= 200:
-        st.markdown("#### ✅ Good! Recommended: **Microbiology, Business Admin, Education**")
+        st.markdown("#### ✅ Good! Recommended: **Microbiology, Business Admin**")
     else:
-        st.markdown("#### 💪 Don't give up! Recommended: **Arts, Education, Vocational**")
+        st.markdown("#### 💪 Don't give up! Recommended: **Arts, Education**")
 
     st.divider()
     
@@ -43,39 +43,10 @@ if st.button("🚀 CALCULATE MY FUTURE ✨", use_container_width=True):
     st.markdown("""
     <div style="background: linear-gradient(135deg,#ff512f,#dd2476); padding:20px; border-radius:20px; color:white;">
     <h2>🔒 UNILAG Aggregate (PAID)</h2>
-    <p>💰 Pay ₦500 to unlock your UNILAG admission chances!</p>
+    <p>💰 Pay ₦500 to unlock!</p>
     <p><b>PalmPay: 8028519092</b><br>Name: Shola Taiwo</p>
-    <p>WhatsApp receipt to 08028519092 to get code</p>
+    <p>WhatsApp receipt to 08028519092</p>
     </div>
     """, unsafe_allow_html=True)
     
-    code = st.text_input("🔑 Enter Unlock Code:", placeholder="Enter code after payment", type="password")
-    SECRET = "UNILAG2025"
-    
-    if code == SECRET:
-        st.success("✅ UNLOCKED! Welcome boss!")
-        waec = st.slider("O'Level Points (5 As = 20 points)", 0, 20, 20)
-        putme = st.number_input("PutMe Score (0-30)", 0, 30, 25)
-        if st.button("🔥 Calculate UNILAG Aggregate", use_container_width=True):
-            aggregate = (total/8) + waec + putme
-            st.snow()
-            st.metric("🔥 Your UNILAG Aggregate", f"{aggregate:.2f} / 100")
-            if aggregate >= 75:
-                st.success("🎉 High chance! Go for Medicine/Law!")
-            elif aggregate >= 65:
-                st.info("😎 Good chance! Engineering, Nursing dey sure")
-            else:
-                st.warning("🤔 Try less competitive course")
-    elif code:
-        st.error("❌ Wrong code! Pay first nau 😅")
-
-# --- SUPPORT ---
-st.divider()
-st.markdown("""
-<div style="background:black; padding:25px; border-radius:20px; border:3px solid #00ff88; text-align:center;">
-<h2 style="color:#00ff88;">💚 Support The Founder</h2>
-<p style="color:white;">Built by a student for students! 🙏</p>
-<h1 style="color:#00ff88;">PalmPay: 8028519092</h1>
-<p style="color:#aaa;">Shola Taiwo | 08028519092</p>
-</div>
-""", unsafe_allow_html=True)
+    code = st.text_input("🔑 Enter Unlock Code:",
