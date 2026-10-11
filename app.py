@@ -2,7 +2,7 @@ import streamlit as st
 from PIL import Image, ImageDraw, ImageFont
 import io
 
-st.set_page_config(page_title="JAMB PRO MAX", page_icon="🔥", layout="centered")
+st.set_page_config(page_title="JAMB PRO MAX", page_icon="🎓", layout="centered")
 
 st.markdown("""
 <style>
@@ -61,9 +61,14 @@ if "qi" not in st.session_state:
     st.session_state.qi = 0
     st.session_state.qscore = 0
 
-st.title("🔥 JAMB PRO MAX 🔥")
-st.markdown("**Not Boring Like ChatGPT Apps - We Are The Best 🫡**")
-st.markdown("2847 students using it RIGHT NOW")
+# LIVELY BANNER
+try:
+    st.image("banner.jpg", use_container_width=True)
+except:
+    st.markdown("<h1 style='text-align:center; color:#6a11cb;'>JAMB PRO MAX</h1>", unsafe_allow_html=True)
+
+st.markdown("<p style='text-align:center; background:#fff3cd; padding:12px; border-radius:15px; font-weight:bold;'>Trusted by 2,847+ Students for Admission Success 🎓✨</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center; color:green;'>University Admission Made Easy - Your Path to 350+ Score!</p>", unsafe_allow_html=True)
 
 c1,c2 = st.columns(2)
 with c1:
@@ -78,9 +83,9 @@ if st.button("CALCULATE MY FUTURE - MAKE ME BLOW!"):
     st.session_state.total = total
     st.balloons()
     st.snow()
-    st.markdown(f"<div class=score-box><h1>{total}/400</h1></div>", unsafe_allow_html=True)
+    st.markdown(f"<div class=score-box><h1>{total}/400</h1><p>Your JAMB Score 🔥</p></div>", unsafe_allow_html=True)
     if total >= 300:
-        st.success("OMO YOU BE GENIUS!")
+        st.success("OMO YOU BE GENIUS! 🎉")
     st.subheader("Courses You Fit Get")
     for crs in get_courses(total):
         st.write(f"- {crs}")
@@ -88,17 +93,16 @@ if st.button("CALCULATE MY FUTURE - MAKE ME BLOW!"):
     buf = io.BytesIO()
     card.save(buf, format="PNG")
     st.image(card)
-    st.download_button("DOWNLOAD FOR STATUS", buf.getvalue(), "jamb.png", "image/png", use_container_width=True)
+    st.download_button("DOWNLOAD FOR WHATSAPP STATUS", buf.getvalue(), "jamb.png", "image/png", use_container_width=True)
 
 st.divider()
-st.subheader("Daily Wahala Quiz - Only Legends Pass")
+st.subheader("Daily Wahala Quiz - Only Legends Pass 🧠")
 
 real_quiz = [
     {"q": "The boys ___ playing", "opts": ["is", "are", "was", "has"], "ans": "are", "exp": "Boys = plural"},
     {"q": "Find x: 2x + 6 = 14", "opts": ["4", "8", "3", "5"], "ans": "4", "exp": "2x=8"},
     {"q": "What is Osmosis?", "opts": ["Movement of water", "Movement of air", "Eating", "Sleeping"], "ans": "Movement of water", "exp": "Water moves"},
     {"q": "Opposite of Ancient?", "opts": ["Old", "Modern", "Past", "Future"], "ans": "Modern", "exp": "Modern is opposite"},
-    {"q": "Simplify: 3 squared squared", "opts": ["81", "9", "18", "27"], "ans": "81", "exp": "9 squared=81"},
 ]
 
 curr = real_quiz[st.session_state.qi % len(real_quiz)]
@@ -120,10 +124,10 @@ with b:
         st.rerun()
 
 st.divider()
-st.subheader("UNLOCK AGGREGATOR")
+st.subheader("UNLOCK AGGREGATOR 🔓")
 st.write("UNILAG 500 | UNIBEN 500 | ALL 1200")
 st.write("PalmPay: 8028519092 - Shola Taiwo")
-st.write("Code: FIRE2025 for 20% OFF today!")
+st.write("Code: FIRE2025 for discount today!")
 
 code_input = st.text_input("Enter Code", placeholder="UNILAG2025").upper().strip()
 unlocked = CODES.get(code_input, [])
@@ -151,11 +155,11 @@ for idx, uni in enumerate(["UNILAG","UNIBEN","OAU","UI"]):
 
 st.divider()
 try:
-    st.image("founder.jpg", caption="Founder", use_container_width=True)
+    st.image("founder.jpg", caption="Founder - Shola Taiwo", use_container_width=True)
 except:
     try:
         st.image("IMG-20261011-WA0011.jpg", use_container_width=True)
     except:
-        st.write("Add founder.jpg")
+        st.write("")
 
-st.markdown("PalmPay: 8028519092 - Shola Taiwo")
+st.markdown("<div style='background:black; padding:15px; border-radius:15px; text-align:center; color:white;'><h3 style='color:#00ff88;'>PalmPay: 8028519092</h3><p>Shola Taiwo - Founder</p></div>", unsafe_allow_html=True)
